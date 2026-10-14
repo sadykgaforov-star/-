@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>FinFuture — финансовый симулятор</title>
+<link rel="stylesheet" href="style.css">
+</head>
+<body>
+<div class="wrap">
+  <header>
+    <h1>FinFuture</h1>
+    <div class="row">
+      <select id="period" aria-label="Период">
+        <option value="week">Неделя</option>
+        <option value="month" selected>Месяц</option>
+        <option value="year">Год</option>
+        <option value="all">Всё время</option>
+      </select>
+      <button id="themeBtn" class="ghost" type="button">Тёмная тема</button>
+      <button id="exportBtn" class="ghost" type="button">Скачать CSV</button>
+    </div>
+  </header>
+
+  <section class="hero">
+    <div><small>Общий баланс</small><b id="balance">0 сом</b></div>
+    <dl>
+      <div><dt>Доходы за период</dt><dd class="i" id="income">0 сом</dd></div>
+      <div><dt>Расходы за период</dt><dd class="e" id="expenses">0 сом</dd></div>
+      <div><dt>Накопления</dt><dd class="s" id="savings">0 сом</dd></div>
+    </dl>
+  </section>
+
+  <main class="grid">
+    <section class="panel">
+      <h2>Новая операция</h2>
+      <form id="txForm">
+        <select id="type" aria-label="Тип"><option value="income">Доход</option><option value="expense">Расход</option></select>
+        <input id="amount" type="number" min="1" step="any" placeholder="Сумма, сом" required>
+        <select id="category" aria-label="Категория"></select>
+        <input id="date" type="date" required>
+        <button>Добавить операцию</button>
+      </form>
+    </section>
+
+    <section class="panel">
+      <h2>Операции</h2>
+      <ul class="tx" id="list"></ul>
+    </section>
+
+    <section class="panel">
+      <h2>Цели накопления</h2>
+      <form id="goalForm">
+        <input id="gName" placeholder="Название, например: Компьютер" required>
+        <input id="gTarget" type="number" min="1" placeholder="Нужная сумма, сом" required>
+        <input id="gMonthly" type="number" min="1" placeholder="Взнос в месяц, сом (для прогноза)">
+        <button>Создать цель</button>
+      </form>
+      <div id="goals"></div>
+    </section>
+
+    <section class="panel">
+      <h2>Аналитика расходов</h2>
+      <label><small>Лимит расходов на месяц, сом</small>
+        <input id="limit" type="number" min="0" placeholder="Например: 20000" style="width:100%"></label>
+      <div class="track"><div id="budgetBar"></div></div>
+      <small id="budgetText"></small>
+      <small class="warn" id="warn"></small>
+      <small>Доходы: <b id="incT"></b></small>
+      <div class="track"><div class="i" id="barInc"></div></div>
+      <small>Расходы: <b id="expT"></b></small>
+      <div class="track"><div class="e" id="barExp"></div></div>
+      <canvas id="chart" width="220" height="220" aria-label="Расходы по категориям"></canvas>
+      <ul class="legend" id="legend"></ul>
+    </section>
+  </main>
+</div>
+<script src="script.js"></script>
+</body>
+</html>
